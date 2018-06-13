@@ -30,7 +30,7 @@ struct el_matriz{
 long int i;
 long int j;
 struct el_matriz *anterior;
-double valor;
+float valor;
 int bandeira_valor;
 };
 
@@ -43,6 +43,29 @@ while(testa_salva_p_el_matriz != NULL){
 
 }
 
+float soma_i(struct el_matriz *p_el_matriz, long int testa_i){
+float soma = 0;
+struct el_matriz *testa_salva_p_el_matriz = p_el_matriz;
+while(testa_salva_p_el_matriz != NULL){
+    if(testa_salva_p_el_matriz->i == testa_i){
+    soma = soma + testa_salva_p_el_matriz->valor;
+    }
+    testa_salva_p_el_matriz = testa_salva_p_el_matriz->anterior;
+}
+return soma;
+}
+
+float soma_j(struct el_matriz *p_el_matriz, long int testa_j){
+float soma = 0;
+struct el_matriz *testa_salva_p_el_matriz = p_el_matriz;
+while(testa_salva_p_el_matriz != NULL){
+    if(testa_salva_p_el_matriz->j == testa_j){
+    soma = soma + testa_salva_p_el_matriz->valor;
+    }
+    testa_salva_p_el_matriz = testa_salva_p_el_matriz->anterior;
+}
+return soma;
+}
 
 int main()
 {
@@ -55,21 +78,23 @@ long int testa_j;
 long int m;
 long int n;
 int testar_i_e_j;
+float soma;
 
 testa_salva_p_el_matriz = NULL;
 salva_p_el_matriz = NULL;
 p_el_matriz = NULL;
 
-while(resp[0] != '4'){
+while(resp[0] != '7'){
 //"MENU" DO PROGRAMA
 printf("///OPERACOES COM MATRIZES ESPARSAS\n");
 printf("Escolha uma funcao: \n");
 printf("1. Criacao da matriz m por n\n");
 printf("2. Exclusao da matriz\n");
 printf("3. Consulta dos valores de uma posicao (i, j) da matriz\n");
+printf("4. Consulta da soma dos valores de uma linha da matriz\n");
+printf("5. Consulta da soma dos valores de uma coluna da matriz\n");
 printf("6. Atribuicao de um valor na posicao (i, j) da matriz\n");
-
-//
+printf("7. Sair\n");
 
 scanf("%s", resp);
 fflush(stdin);
@@ -105,6 +130,8 @@ printf("\n");
 
 if(m <= 0){
     printf("Valor invalido para o numero de linhas!\n");
+    free(p_el_matriz);
+    p_el_matriz = NULL;
     printf("\n");
     continue;
 }
@@ -115,6 +142,8 @@ printf("\n");
 
 if(n <= 0){
     printf("Valor invalido para o numero de colunas!\n");
+    free(p_el_matriz);
+    p_el_matriz = NULL;
     printf("\n");
     continue;
 }
@@ -157,7 +186,7 @@ if(testar_i_e_j == 0){
 while(testa_salva_p_el_matriz != NULL){
 if((testa_i == testa_salva_p_el_matriz->i) && (testa_j == testa_salva_p_el_matriz->j) ){
     if(testa_salva_p_el_matriz->bandeira_valor){
-    printf("O valor da posicao (%ld, %ld) e: %lf\n", testa_salva_p_el_matriz->i, testa_salva_p_el_matriz->j, testa_salva_p_el_matriz->valor);
+    printf("O valor da posicao (%ld, %ld) e: %.4f\n", testa_salva_p_el_matriz->i, testa_salva_p_el_matriz->j, testa_salva_p_el_matriz->valor);
     break;
 } else {
     printf("O valor da posicao (%ld, %ld) e: 0", testa_i, testa_j);
@@ -171,10 +200,52 @@ testa_salva_p_el_matriz = testa_salva_p_el_matriz->anterior;
 
 printf("\n");
 }
+}
 
+//CONSULTA DA SOMA DOS VALORES DE UMA LINHA DA MATRIZ
+else if(resp[0] == '4'){
+if(p_el_matriz == NULL){
+    printf("Nao foi criada uma matriz. Nao ha o que somar.\n");
+    printf("\n");
+    continue;
+}
+printf("Digite a linha (i) cuja soma deseja consultar\n");
+scanf("%ld", &testa_i);
+
+if(testa_i < 1 || testa_i > m){
+    printf("Valor invalido de i\n");
+    printf("\n");
+    continue;
+}
+
+soma = soma_i(p_el_matriz, testa_i);
+printf("A soma dos valores da linha %ld e: %.4f\n", testa_i, soma);
+printf("\n");
+}
+
+//CONSULTA DA SOMA DOS VALORES DE UMA COLUNA DA MATRI
+else if(resp[0] == '5'){
+if(p_el_matriz == NULL){
+    printf("Nao foi criada uma matriz. Nao ha o que somar.\n");
+    printf("\n");
+    continue;
+}
+printf("Digite a coluna cuja soma deseja consultar\n");
+scanf("%ld", &testa_j);
+
+if(testa_j < 1 || testa_j > n){
+    printf("Valor invalido de j\n");
+    printf("\n");
+    continue;
+}
+
+soma = soma_j(p_el_matriz, testa_j);
+printf("A soma dos valores da coluna %ld e: %.4f\n", testa_j, soma);
+printf("\n");
+}
 
 //ATRIBUICAO DE UM VALOR NA POSICAO (i, j) DA MATRIZ
-} else if(resp[0] == '6'){
+else if(resp[0] == '6'){
 if(p_el_matriz == NULL){
     printf("Nao foi criada uma matriz. Nao ha posicoes para atribuir valores \n");
     printf("\n");
@@ -187,7 +258,7 @@ if(p_el_matriz->bandeira_valor == 0){
         continue;
     }
     printf("Digite o valor que deseja atribuir a posicao (%ld, %ld): ", p_el_matriz->i, p_el_matriz->j);
-    scanf("%lf", &p_el_matriz->valor);
+    scanf("%f", &p_el_matriz->valor);
     printf("\n");
     p_el_matriz->bandeira_valor = 1;
     printf("Valor atribuido com sucesso.\n");
@@ -206,7 +277,7 @@ if(testar_i_e_j == 0){
     continue;
 }
 printf("Digite o valor que deseja atribuir a posicao (%ld, %ld): ", p_el_matriz->i, p_el_matriz->j);
-scanf("%lf", &p_el_matriz->valor);
+scanf("%f", &p_el_matriz->valor);
 printf("\n");
 p_el_matriz->bandeira_valor = 1;
 printf("Valor atribuido com sucesso.\n");
@@ -215,7 +286,8 @@ printf("Valor atribuido com sucesso.\n");
 printf("\n");
 }
 }
-free(p_el_matriz);
+
+exclusao_matriz(p_el_matriz);
 return 0;
 
 }
