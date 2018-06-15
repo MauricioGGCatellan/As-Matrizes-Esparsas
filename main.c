@@ -21,24 +21,24 @@ testa_salva_p_el_matriz = NULL;
 salva_p_el_matriz = NULL;
 p_el_matriz = NULL;
 
-while(resp[0] != '7'){
+while(resp[0] != '6'){
 //"MENU" DO PROGRAMA
 printf("///OPERACOES COM MATRIZES ESPARSAS\n");
 printf("Escolha uma funcao: \n");
-printf("1. Criacao da matriz m por n\n");
-printf("2. Exclusao da matriz\n");
-printf("3. Consulta dos valores de uma posicao (i, j) da matriz\n");
-printf("4. Consulta da soma dos valores de uma linha (i) da matriz\n");
-printf("5. Consulta da soma dos valores de uma coluna (j) da matriz\n");
-printf("6. Atribuicao de um valor na posicao (i, j) da matriz\n");
-printf("7. Sair\n");
+printf("0. Criacao da matriz m por n\n");
+printf("1. Exclusao da matriz\n");
+printf("2. Consulta dos valores de uma posicao (i, j) da matriz\n");
+printf("3. Consulta da soma dos valores de uma linha (i) da matriz\n");
+printf("4. Consulta da soma dos valores de uma coluna (j) da matriz\n");
+printf("5. Atribuicao de um valor na posicao (i, j) da matriz\n");
+printf("6. Sair\n");
 
 scanf("%s", resp);
 fflush(stdin);
 
 //CRIACAO DA MATRIZ M POR N
 
-if(resp[0] == '1'){
+if(resp[0] == '0'){
 if(p_el_matriz != NULL){
     printf("Matriz ja criada. Deseja sobrescreve-la criando uma nova?(s\n)");
     while(resp[0] != 's' && resp[0] != 'n' && resp[0] != 'S' && resp[0] != 'N'){
@@ -90,7 +90,7 @@ printf("\n");
 }
 
 //EXCLUSAO DA MATRIZ
-else if(resp[0] == '2'){
+else if(resp[0] == '1'){
 if(p_el_matriz == NULL){
     printf("Nao ha matriz a ser excluida \n");
     printf("\n");
@@ -104,7 +104,7 @@ printf("\n");
 }
 
 //CONSULTA DOS VALORES DE UMA POSICAO (i, j) DA MATRIZ
-else if(resp[0] == '3'){
+else if(resp[0] == '2'){
 
 testa_salva_p_el_matriz = p_el_matriz;
 if(testa_salva_p_el_matriz == NULL){
@@ -140,7 +140,7 @@ printf("\n");
 }
 
 //CONSULTA DA SOMA DOS VALORES DE UMA LINHA DA MATRIZ
-else if(resp[0] == '4'){
+else if(resp[0] == '3'){
 if(p_el_matriz == NULL){
     printf("Nao foi criada uma matriz. Nao ha o que somar.\n");
     printf("\n");
@@ -161,7 +161,7 @@ printf("\n");
 }
 
 //CONSULTA DA SOMA DOS VALORES DE UMA COLUNA DA MATRI
-else if(resp[0] == '5'){
+else if(resp[0] == '4'){
 if(p_el_matriz == NULL){
     printf("Nao foi criada uma matriz. Nao ha o que somar.\n");
     printf("\n");
@@ -182,7 +182,7 @@ printf("\n");
 }
 
 //ATRIBUICAO DE UM VALOR NA POSICAO (i, j) DA MATRIZ
-else if(resp[0] == '6'){
+else if(resp[0] == '5'){
 if(p_el_matriz == NULL){
     printf("Nao foi criada uma matriz. Nao ha posicoes para atribuir valores \n");
     printf("\n");
