@@ -1,5 +1,16 @@
 # depslib dependency file v1.0
-1528933503 source:c:\users\maurício gg catellan\desktop\as matrizes esparsas\main.c
+1529020855 source:c:\users\maurício gg catellan\desktop\as matrizes esparsas\main.c
 	<stdio.h>
 	<stdlib.h>
+	"Functions.h"
+
+1529020389 source:c:\users\maurício gg catellan\desktop\as matrizes esparsas\functions_code.c
+	<stdio.h>
+	<stdlib.h>
+	"Struct.h"
+
+1529020389 c:\users\maurício gg catellan\desktop\as matrizes esparsas\struct.h
+
+1529020508 c:\users\maurício gg catellan\desktop\as matrizes esparsas\functions.h
+	"Struct.h"
 

@@ -1,71 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-void digitar_i_e_j (long int *i, long int *j){
-printf("Digite o valor i da posicao: ");
-scanf("%ld", i);
-printf("\n");
-
-printf("Digite o valor j da posicao: ");
-scanf("%ld", j);
-printf("\n");
-}
-
-int teste_i_e_j(long int testa_i, long int testa_j, long int m, long int n){
-if(testa_i < 1 || testa_i > m){
-    printf("Valor invalido de i ou j\n");
-    printf("\n");
-    return 0;
-}
-if(testa_j < 1 || testa_j > n){
-    printf("Valor invalido de i ou j\n");
-    printf("\n");
-    return 0;
-}
-return 1;
-}
-
-struct el_matriz{
-long int i;
-long int j;
-struct el_matriz *anterior;
-float valor;
-int bandeira_valor;
-};
-
-void exclusao_matriz(struct el_matriz *p_el_matriz){
-struct el_matriz *testa_salva_p_el_matriz = p_el_matriz;
-while(testa_salva_p_el_matriz != NULL){
-    free(testa_salva_p_el_matriz);
-    testa_salva_p_el_matriz = testa_salva_p_el_matriz->anterior;
-}
-
-}
-
-float soma_i(struct el_matriz *p_el_matriz, long int testa_i){
-float soma = 0;
-struct el_matriz *testa_salva_p_el_matriz = p_el_matriz;
-while(testa_salva_p_el_matriz != NULL){
-    if(testa_salva_p_el_matriz->i == testa_i){
-    soma = soma + testa_salva_p_el_matriz->valor;
-    }
-    testa_salva_p_el_matriz = testa_salva_p_el_matriz->anterior;
-}
-return soma;
-}
-
-float soma_j(struct el_matriz *p_el_matriz, long int testa_j){
-float soma = 0;
-struct el_matriz *testa_salva_p_el_matriz = p_el_matriz;
-while(testa_salva_p_el_matriz != NULL){
-    if(testa_salva_p_el_matriz->j == testa_j){
-    soma = soma + testa_salva_p_el_matriz->valor;
-    }
-    testa_salva_p_el_matriz = testa_salva_p_el_matriz->anterior;
-}
-return soma;
-}
+//INCLUSÃO DE HEADER COM DECLARAÇÕES DE FUNÇÕES E STRUCT
+#include "Functions.h"
 
 int main()
 {
@@ -91,8 +28,8 @@ printf("Escolha uma funcao: \n");
 printf("1. Criacao da matriz m por n\n");
 printf("2. Exclusao da matriz\n");
 printf("3. Consulta dos valores de uma posicao (i, j) da matriz\n");
-printf("4. Consulta da soma dos valores de uma linha da matriz\n");
-printf("5. Consulta da soma dos valores de uma coluna da matriz\n");
+printf("4. Consulta da soma dos valores de uma linha (i) da matriz\n");
+printf("5. Consulta da soma dos valores de uma coluna (j) da matriz\n");
 printf("6. Atribuicao de um valor na posicao (i, j) da matriz\n");
 printf("7. Sair\n");
 
@@ -186,7 +123,7 @@ if(testar_i_e_j == 0){
 while(testa_salva_p_el_matriz != NULL){
 if((testa_i == testa_salva_p_el_matriz->i) && (testa_j == testa_salva_p_el_matriz->j) ){
     if(testa_salva_p_el_matriz->bandeira_valor){
-    printf("O valor da posicao (%ld, %ld) e: %.4f\n", testa_salva_p_el_matriz->i, testa_salva_p_el_matriz->j, testa_salva_p_el_matriz->valor);
+    printf("O valor da posicao (%ld, %ld) e: %.3f\n", testa_salva_p_el_matriz->i, testa_salva_p_el_matriz->j, testa_salva_p_el_matriz->valor);
     break;
 } else {
     printf("O valor da posicao (%ld, %ld) e: 0", testa_i, testa_j);
@@ -219,7 +156,7 @@ if(testa_i < 1 || testa_i > m){
 }
 
 soma = soma_i(p_el_matriz, testa_i);
-printf("A soma dos valores da linha %ld e: %.4f\n", testa_i, soma);
+printf("A soma dos valores da linha %ld e: %.3f\n", testa_i, soma);
 printf("\n");
 }
 
@@ -240,7 +177,7 @@ if(testa_j < 1 || testa_j > n){
 }
 
 soma = soma_j(p_el_matriz, testa_j);
-printf("A soma dos valores da coluna %ld e: %.4f\n", testa_j, soma);
+printf("A soma dos valores da coluna %ld e: %.3f\n", testa_j, soma);
 printf("\n");
 }
 
